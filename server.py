@@ -27,7 +27,7 @@ class ExtendedHTTPHandler(SimpleHTTPRequestHandler):
     elif self.path.startswith('/search'):
       params = parse_qs(urlparse(self.path).query)
       search_term = params['term'][0]
-      
+
       query_string = urllib.urlencode({
         'method': 'flickr.photos.search',
         'media': 'photos',
