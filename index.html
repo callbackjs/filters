@@ -10,19 +10,34 @@
   </head>
 
   <body>
-    <canvas id="image-canvas" width="660" height="440"></canvas>
-    <img alt="Nature" src="images/nature.jpg" />
+    <div id="image-wrapper">
+      <canvas id="image-canvas" width="660" height="440"></canvas>
+      <img alt="Nature" src="images/nature.jpg" />
 
-    <div id="footer">
-      <span>Filters:</span>
-      <a href="#" id="grayscale" class="button">Grayscale</a>
-      <a href="#" id="brighten" class="button">Brighten</a>
-      <a href="#" id="threshold" class="button">Threshold</a>
-      <a href="#" id="reset" class="button">Reset</a>
+      <div id="footer">
+        <span>Filters:</span>
+        <a href="#" id="grayscale" class="button">Grayscale</a>
+        <a href="#" id="brighten" class="button">Brighten</a>
+        <a href="#" id="threshold" class="button">Threshold</a>
+        <a href="#" id="reset" class="button">Reset</a>
+      </div>
+    </div>
+
+    <div id="comments">
+      <h2>Comments</h2>
+
+      <form>
+        <input type="text" name="name" placeholder="Name" />
+        <textarea name="message" rows="8" cols="5" placeholder="Comment on this photo..."></textarea>
+        <input type="submit" value="Add your comment" />
+      </form>
+
+      <ul id="comment-list"></ul>
     </div>
 
     <!-- JS -->
     <script src="js/filters.js"></script>
     <script src="js/listeners.js"></script>
+    <script src="js/comments.js"></script>
   </body>
 </html>

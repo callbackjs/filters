@@ -1,3 +1,12 @@
+/* Apply a natural box layout model to all elements */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body {
   font: 15px/1.5 "Helvetica Neue", Helvetica, Arial, Sans-Serif;
   background: url(../images/pattern.png) repeat;
@@ -50,9 +59,69 @@ img {
   visibility: hidden;
 }
 
+#image-wrapper {
+  position: relative;
+  height: 650px;
+  background: url(../images/pattern.png) repeat;
+  border-bottom: 1px solid #ddd;
+}
+
+#comments {
+  width: 570px;
+  margin: 40px auto 0;
+  overflow: hidden;
+}
+
+#comments h2 {
+  margin-bottom: 0;
+}
+
+#comments form {
+  overflow: hidden;
+  margin-bottom: 50px;
+}
+
+#comments textarea, #comments input {
+  float: left;
+  width: 568px;
+  padding: 10px 12px;
+  height: 150px;
+  border: 1px solid #bbb;
+  outline: none;
+  margin-top: 20px;
+
+  font: 14px/1.4 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+
+  box-shadow: inset 0 1px 2px #ddd;
+  -moz-box-shadow: inset 0 1px 2px #ddd;
+  -webkit-box-shadow: inset 0 1px 2px #ddd;
+  -o-box-shadow: inset 0 1px 2px #ddd;
+  -ms-box-shadow: inset 0 1px 2px #ddd;
+}
+
+#comments input {
+  height: 40px;
+}
+
+#comments input[type="submit"] {
+  background: #eee;
+}
+
+#comments a {
+  float: right;
+  margin-right: 0;
+  padding: 5px 12px;
+}
+
 #footer {
   width: 505px;
-  position: fixed;
+  position: absolute;
   bottom: 40px;
   left: 50%;
 
@@ -89,7 +158,7 @@ img {
   background-image: linear-gradient(to bottom, #ddd, #eee);
 }
 
-#brighten {
+#brighten, #comments input[type="submit"] {
   color: #fff;
   border: 1px solid #3e8b2d;
   background-color: #62c462;
@@ -100,7 +169,7 @@ img {
   background-image: linear-gradient(to bottom, #62c462, #51a351);
 }
 
-#brighten:active {
+#brighten:active, #comments input[type="submit"]:active {
   background-color: #51a351;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#51a351), to(#62c462));
   background-image: -webkit-linear-gradient(top, #51a351, #62c462);
@@ -109,7 +178,7 @@ img {
   background-image: linear-gradient(to bottom, #51a351, #62c462);
 }
 
-#threshold {
+#threshold, #comments a {
   color: #fff;
   border: 1px solid #2f96b4;
   background-color: #5bc0de;
@@ -120,7 +189,7 @@ img {
   background-image: linear-gradient(to bottom, #5bc0de, #2f96b4);
 }
 
-#threshold:active {
+#threshold:active, #comments a:active {
   background-color: #2f96b4;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#2f96b4), to(#5bc0de));
   background-image: -webkit-linear-gradient(top, #2f96b4, #5bc0de);
@@ -147,4 +216,24 @@ img {
   background-image: -moz-linear-gradient(top, #222, #444);
   background-image: -o-linear-gradient(top, #222, #444);
   background-image: linear-gradient(to bottom, #222, #444);
+}
+
+#comment-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#comment-list li {
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+#comment-list h3 {
+  float: left;
+  margin: 0 5px 0 0;
+}
+
+#comment-list p {
+  line-height: 1.5;
+  margin: 0;
 }
