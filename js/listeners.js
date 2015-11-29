@@ -1,3 +1,6 @@
+// OK HTTP response status code
+var STATUS_OK = 200;
+
 // base image to filter
 var image = document.getElementsByTagName('img')[0];
 
@@ -72,4 +75,18 @@ function addClickEventListeners() {
   });
 }
 
-// TODO: flickr code
+var imageRequest = new XMLHttpRequest();
+
+imageRequest.addEventListener('load', function() {
+  if (imageRequest.status === STATUS_OK) {
+    // pick a random landscape image and use it
+    var photos = JSON.parse(imageRequest.responseText); 
+    var randomIndex = Math.floor(Math.random() * photos.length);
+
+    setFlickrPhotoSrc(photos[randomIndex]);
+  }
+});
+
+// fetch landscape images
+imageRequest.open('GET', '/search?term=yosemite');
+imageRequest.send();
