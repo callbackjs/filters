@@ -11,6 +11,24 @@ var brighten = document.getElementById('brighten');
 var threshold = document.getElementById('threshold');
 var reset = document.getElementById('reset');
 
+/* Set which Flickr photo to apply filters to.
+ *
+ * Arguments:
+ * src -- the URL of the Flickr photo
+ */
+function setFlickrPhotoSrc(src) {
+  image.src = '/proxy?url=' + encodeURIComponent(src);
+
+  image.addEventListener('load', function() {
+    imageCanvas.width = image.width;
+    imageCanvas.height = image.height;
+    imageCanvas.style.display = 'block';
+
+    canvasContext.drawImage(image, 0, 0);
+    addClickEventListeners();
+  });
+}
+
 /* Returns the image data associated with the canvas. */
 function getImageData() {
   return canvasContext.getImageData(0, 0, imageCanvas.width,
@@ -30,10 +48,8 @@ function applyFilter(filter) {
   canvasContext.putImageData(data, 0, 0);
 }
 
-// when window has loaded, the image is ready to be drawn on the canvas
-window.addEventListener('load', function(event) {
-  canvasContext.drawImage(image, 0, 0);
-   
+/* Add click event listeners on the various filter buttons. */
+function addClickEventListeners() {
   // apply appropriate filters based off which buttons were clicked
   grayscale.addEventListener('click', function(event) {
     applyFilter(filterGrayscale);
@@ -54,4 +70,6 @@ window.addEventListener('load', function(event) {
     canvasContext.drawImage(image, 0, 0);
     event.preventDefault();
   });
-});
+}
+
+// TODO: flickr code
