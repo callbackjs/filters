@@ -106,7 +106,7 @@ function renderComment(name, message) {
  * ])
  * => <div>
  *      <h1 class="headline">JavaScript</h1>
- *      is awesome
+ *      is awesome,
  *      <span>especially in CS42.</span>
  *    </div>
  */
