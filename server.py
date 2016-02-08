@@ -38,7 +38,7 @@ class ExtendedHTTPHandler(SimpleHTTPRequestHandler):
       })
 
       flickr_api_handle = urllib2.urlopen(
-        'https://ycpi.api.flickr.com/services/rest/?' + query_string)
+        'https://api.flickr.com/services/rest/?' + query_string)
 
       flickr_data = flickr_api_handle.read()
       flickr_data = json.loads(flickr_data[3:-1])
