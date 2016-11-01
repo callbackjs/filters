@@ -1,5 +1,5 @@
 // OK HTTP response status code
-var STATUS_OK = 200;
+const STATUS_OK = 200
 
 // base image to filter
 const image = document.getElementsByTagName('img')[0]
@@ -75,18 +75,17 @@ function addClickEventListeners() {
   })
 }
 
-var imageRequest = new XMLHttpRequest();
-
-imageRequest.addEventListener('load', function() {
+const imageRequest = new XMLHttpRequest()
+imageRequest.addEventListener('load', () => {
   if (imageRequest.status === STATUS_OK) {
     // pick a random landscape image and use it
-    var photos = JSON.parse(imageRequest.responseText); 
-    var randomIndex = Math.floor(Math.random() * photos.length);
+    const photos = JSON.parse(imageRequest.responseText) 
+    const randomIndex = Math.floor(Math.random() * photos.length)
 
-    setFlickrPhotoSrc(photos[randomIndex]);
+    setFlickrPhotoSrc(photos[randomIndex])
   }
-});
+})
 
 // fetch landscape images
-imageRequest.open('GET', '/search?term=yosemite');
-imageRequest.send();
+imageRequest.open('GET', '/search?term=yosemite')
+imageRequest.send()
