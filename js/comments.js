@@ -3,9 +3,9 @@
 /* Renders a comment with the given name and message to be listed in the
  * #comments div. */
 function renderComment(name, message) {
-  return tag('li', [
-    tag('p', [
-      tag('strong', name),
+  return tag('li', {}, [
+    tag('p', {}, [
+      tag('strong', {}, name),
       ' ',
       message
     ])
