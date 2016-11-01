@@ -2,17 +2,17 @@
 var STATUS_OK = 200;
 
 // base image to filter
-var image = document.getElementsByTagName('img')[0];
+const image = document.getElementsByTagName('img')[0]
 
 // canvas context for drawing
-var imageCanvas = document.getElementById('image-canvas');
-var canvasContext = imageCanvas.getContext('2d');
+const imageCanvas = document.getElementById('image-canvas')
+const canvasContext = imageCanvas.getContext('2d')
 
 // DOM filter buttons
-var grayscale = document.getElementById('grayscale');
-var brighten = document.getElementById('brighten');
-var threshold = document.getElementById('threshold');
-var reset = document.getElementById('reset');
+const grayscale = document.getElementById('grayscale')
+const brighten = document.getElementById('brighten')
+const threshold = document.getElementById('threshold')
+const reset = document.getElementById('reset')
 
 /* Set which Flickr photo to apply filters to.
  *
@@ -20,22 +20,22 @@ var reset = document.getElementById('reset');
  * src -- the URL of the Flickr photo
  */
 function setFlickrPhotoSrc(src) {
-  image.src = '/proxy?url=' + encodeURIComponent(src);
+  image.src = '/proxy?url=' + encodeURIComponent(src)
 
-  image.addEventListener('load', function() {
-    imageCanvas.width = image.width;
-    imageCanvas.height = image.height;
-    imageCanvas.style.display = 'block';
+  image.addEventListener('load', () => {
+    imageCanvas.width = image.width
+    imageCanvas.height = image.height
+    imageCanvas.style.display = 'block'
 
-    canvasContext.drawImage(image, 0, 0);
-    addClickEventListeners();
-  });
+    canvasContext.drawImage(image, 0, 0)
+    addClickEventListeners()
+  })
 }
 
 /* Returns the image data associated with the canvas. */
 function getImageData() {
-  return canvasContext.getImageData(0, 0, imageCanvas.width,
-    imageCanvas.height);
+  return canvasContext.getImageData(
+    0, 0, imageCanvas.width, imageCanvas.height)
 }
 
 /* Applies the given filter to the canvas. Updates the canvas' image data
@@ -46,33 +46,33 @@ function getImageData() {
  *  new, filtered values
  */
 function applyFilter(filter) {
-  var data = getImageData();
-  data.data = filter(data.data);
-  canvasContext.putImageData(data, 0, 0);
+  const imageData = getImageData()
+  imageData.data = filter(imageData.data)
+  canvasContext.putImageData(imageData, 0, 0)
 }
 
 /* Add click event listeners on the various filter buttons. */
 function addClickEventListeners() {
   // apply appropriate filters based off which buttons were clicked
-  grayscale.addEventListener('click', function(event) {
-    applyFilter(filterGrayscale);
-    event.preventDefault();
-  });
+  grayscale.addEventListener('click', event => {
+    event.preventDefault()
+    applyFilter(filterGrayscale)
+  })
 
-  brighten.addEventListener('click', function(event) {
-    applyFilter(filterBrighten);
-    event.preventDefault();
-  });
+  brighten.addEventListener('click', event => {
+    event.preventDefault()
+    applyFilter(filterBrighten)
+  })
 
-  threshold.addEventListener('click', function(event) {
-    applyFilter(filterThreshold);
-    event.preventDefault();
-  });
+  threshold.addEventListener('click', event => {
+    event.preventDefault()
+    applyFilter(filterThreshold)
+  })
 
-  reset.addEventListener('click', function(event) {
-    canvasContext.drawImage(image, 0, 0);
-    event.preventDefault();
-  });
+  reset.addEventListener('click', event => {
+    event.preventDefault()
+    canvasContext.drawImage(image, 0, 0)
+  })
 }
 
 var imageRequest = new XMLHttpRequest();
