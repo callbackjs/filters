@@ -1,67 +1,68 @@
 // HTTP OK status code
-var STATUS_OK = 200;
+const STATUS_OK = 200
 
 // interval to refresh comments at
-var COMMENTS_REFRESH_INTERVAL = 2000;
+const COMMENTS_REFRESH_INTERVAL = 2000
 
-var commentForm = document.getElementsByTagName('form')[0];
-var commentList = document.getElementById('comment-list');
-var commentTemplate = document.getElementById('comment-template');
+const commentForm = document.getElementsByTagName('form')[0]
+const commentList = document.getElementById('comment-list')
+const commentTemplate = document.getElementById('comment-template')
 
-commentForm.addEventListener('submit', function(event) {
-  event.preventDefault();
+commentForm.addEventListener('submit', event => {
+  event.preventDefault()
 
-  var nameInput = commentForm.querySelector('input[type="text"]');
-  var messageTextarea = commentForm.querySelector('textarea');
+  const nameInput = commentForm.querySelector('input[type="text"]')
+  const messageTextarea = commentForm.querySelector('textarea')
 
-  var name = nameInput.value;
-  var message = messageTextarea.value;
+  const name = nameInput.value
+  const message = messageTextarea.value
 
   // ensure both name and comment exist
   if (!name || !message) {
-    return;
+    return
   }
 
   // add comment via AJAX
-  var request = new XMLHttpRequest();
-  request.addEventListener('load', function(event) {
+  const request = new XMLHttpRequest()
+  request.addEventListener('load', event => {
     if (request.status === STATUS_OK) {
-      addCommentToList(name, message);
-      nameInput.value = '';
-      messageTextarea.value = '';
+      addCommentToList(name, message)
+      nameInput.value = ''
+      messageTextarea.value = ''
     }
-  });
+  })
 
-  request.open('POST', '/comments');
-  request.setRequestHeader('Content-type', 'application/json');
+  request.open('POST', '/comments')
+  request.setRequestHeader('Content-type', 'application/json')
   request.send(JSON.stringify({
     name: name,
-    message: message
-  }));
-});
+    message: message,
+  }))
+})
 
-var lastResponse = null;
+let lastResponse = null
 
-(function refreshComments() {
+function refreshComments() {
   // get comments via AJAX
-  var request = new XMLHttpRequest();
-  request.addEventListener('load', function(event) {
+  const request = new XMLHttpRequest()
+  request.addEventListener('load', event => {
     if (request.status === STATUS_OK) {
-      var comments = JSON.parse(request.responseText);
-      lastResponse = request.responseText;
+      const comments = JSON.parse(request.responseText)
+      lastResponse = request.responseText
 
-      commentList.innerHTML = '';
-      comments.forEach(function(comment) {
-        addCommentToList(comment.name, comment.message);
-      });
+      commentList.innerHTML = ''
+      comments.forEach(comment => {
+        addCommentToList(comment.name, comment.message)
+      })
     }
-  });
+  })
 
-  request.open('GET', '/comments');
-  request.send();
+  request.open('GET', '/comments')
+  request.send()
 
-  setTimeout(refreshComments, COMMENTS_REFRESH_INTERVAL);
-})();
+  setTimeout(refreshComments, COMMENTS_REFRESH_INTERVAL)
+}
+refreshComments()
 
 /* Adds a comment to the list of comments.
  *
@@ -70,16 +71,16 @@ var lastResponse = null;
  * message -- the message of the comment
  */
 function addCommentToList(name, message) {
-  var commentLi = renderComment(name, message);
-  commentList.appendChild(commentLi);
+  const commentLi = renderComment(name, message)
+  commentList.appendChild(commentLi)
 }
 
 /* Renders a comment with the given name and message to be listed in the
  * #comments div. */
 function renderComment(name, message) {
-  return tag('li', [
-    tag('p', [
-      tag('strong', name),
+  return tag('li', {}, [
+    tag('p', {}, [
+      tag('strong', {}, name),
       ' ',
       message
     ])
