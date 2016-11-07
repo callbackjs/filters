@@ -55,13 +55,15 @@ function refreshComments() {
         addCommentToList(comment.name, comment.message)
       })
     }
+
+    // refetch comments periodically
+    setTimeout(refreshComments, COMMENTS_REFRESH_INTERVAL)
   })
 
   request.open('GET', '/comments')
   request.send()
-
-  setTimeout(refreshComments, COMMENTS_REFRESH_INTERVAL)
 }
+
 refreshComments()
 
 /* Adds a comment to the list of comments.
