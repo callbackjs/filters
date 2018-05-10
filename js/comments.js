@@ -6,7 +6,6 @@ const COMMENTS_REFRESH_INTERVAL = 2000
 
 const commentForm = document.getElementsByTagName('form')[0]
 const commentList = document.getElementById('comment-list')
-const commentTemplate = document.getElementById('comment-template')
 
 commentForm.addEventListener('submit', event => {
   event.preventDefault()
