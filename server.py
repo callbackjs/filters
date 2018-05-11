@@ -67,7 +67,7 @@ class ExtendedHTTPHandler(SimpleHTTPRequestHandler):
         self.send_response(200)
         self.end_headers()
 
-        success = {'success': True}
+        success = {}
         self.wfile.write(json.dumps(success))
     else:
       return SimpleHTTPRequestHandler.do_POST(self)
